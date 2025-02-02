@@ -18,7 +18,7 @@ Ecofren/
 ### Prerequisites
 
 - **Node.js** (v14.x or later) and npm/yarn for the webapp
-- **Godot Engine** (v3.x or 4.x, depending on your project setup) for the game
+- **Godot Engine** (4.x) for the game
 - **Git** for version control
 
 ### Setting Up the Webapp (Next.js)
