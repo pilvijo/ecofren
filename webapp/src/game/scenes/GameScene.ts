@@ -1,7 +1,8 @@
 import Phaser from 'phaser';
-import { updatePlayerMovement } from '../mechanics/topDown';
-import { createPlayerAnimations } from '../mechanics/playerAnimations';
-import { createPlayer, PlayerCreationResult } from '../mechanics/playerFactory';
+import { updatePlayerMovement } from '../mechanics/player/topDown';
+import { createPlayerAnimations } from '../mechanics/player/playerAnimations';
+import { createPlayer, PlayerCreationResult } from '../mechanics/player/playerFactory';
+import apartmentLevelData, { TILE_HEIGHT, TILE_WIDTH } from '../constants/apartmentLevelData';
 
 export default class GameScene extends Phaser.Scene {
     private player!: Phaser.Physics.Arcade.Sprite;
@@ -18,6 +19,16 @@ export default class GameScene extends Phaser.Scene {
     }
 
     create(): void {
+        const map = this.make.tilemap({
+            data: apartmentLevelData,
+            tileWidth: TILE_WIDTH,
+            tileHeight: TILE_HEIGHT
+          });
+
+        const tileset = map.addTilesetImage("tileset", "tileset")!;
+        const background = map.createLayer(0, tileset, 0, 0)!;
+        background.setDisplaySize(this.cameras.main.width, this.cameras.main.height);
+
         createPlayerAnimations(this);
         const playerData: PlayerCreationResult = createPlayer(this, 400, 300, 'player', 0);
         this.player = playerData.player;

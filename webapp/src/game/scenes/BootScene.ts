@@ -8,6 +8,8 @@ export default class BootScene extends Phaser.Scene {
   }
 
   preload(): void {
+    this.load.image("tileset", "/assets/interior/TopDownHouse_FloorsAndWalls.png");
+    
     this.load.spritesheet('player', '/assets/sprites/player.png', {
       frameWidth: FRAME_SIZE,
       frameHeight: FRAME_SIZE,
