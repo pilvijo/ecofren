@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { MovementKeys, updatePlayerMovement } from '../mechanics/TopDown';
 
 export default class GameScene extends Phaser.Scene {
   private player!: Phaser.Physics.Arcade.Sprite;
@@ -6,6 +7,7 @@ export default class GameScene extends Phaser.Scene {
   private aKey!: Phaser.Input.Keyboard.Key;
   private sKey!: Phaser.Input.Keyboard.Key;
   private dKey!: Phaser.Input.Keyboard.Key;
+  private speed: number = 200;
 
   constructor() {
     super({ key: 'TopDownScene' });
@@ -73,31 +75,12 @@ export default class GameScene extends Phaser.Scene {
   }
 
   update(): void {
-    const direction = new Phaser.Math.Vector2(0, 0);
-    if (this.wKey.isDown) direction.y -= 1;
-    if (this.sKey.isDown) direction.y += 1;
-    if (this.aKey.isDown) direction.x -= 1;
-    if (this.dKey.isDown) direction.x += 1;
-    if (direction.lengthSq() > 0) direction.normalize();
-    const speed = 200;
-    this.player.setVelocity(direction.x * speed, direction.y * speed);
-    if (direction.x === 0 && direction.y === 0) {
-      this.player.anims.stop();
-      this.player.setFrame(1);
-    } else {
-      if (Math.abs(direction.x) > Math.abs(direction.y)) {
-        if (direction.x < 0) {
-          this.player.anims.play('walk-left', true);
-        } else {
-          this.player.anims.play('walk-right', true);
-        }
-      } else {
-        if (direction.y < 0) {
-          this.player.anims.play('walk-up', true);
-        } else {
-          this.player.anims.play('walk-down', true);
-        }
-      }
-    }
+    const keys: MovementKeys = {
+      w: this.wKey,
+      a: this.aKey,
+      s: this.sKey,
+      d: this.dKey
+    };
+    updatePlayerMovement(this.player, keys, this.speed);
   }
 }
