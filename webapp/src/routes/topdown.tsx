@@ -16,11 +16,15 @@ export default function GameCanvas() {
   return (
     <main 
         className="w-screen h-screen flex items-center justify-center"
-        style={{ backgroundImage: "url('/assets/wallpaper.webp')" }}
+        style={{ 
+            backgroundImage: "url('/assets/wallpaper.webp')",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+        }}
     >
         <div 
             id="game-container" 
-            className="rounded-md border-8 border-green-600"
+            className="rounded-md border-8 border-green-700 outline outline-2 outline-green-800 shadow-lg"
         />
     </main>
   );

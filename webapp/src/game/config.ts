@@ -5,12 +5,12 @@ export const gameConfig = {
   type: Phaser.AUTO,
   width: 800,
   height: 600,
-  parent: 'game-container', // The div in GameCanvas.js
+  parent: 'game-container',
   scene: [BootScene, GameScene],
   physics: {
     default: 'arcade',
     arcade: {
-      debug: false,
+      debug: true,
     },
   },
 };
