@@ -1,36 +1,30 @@
 import Phaser from 'phaser';
 import { updatePlayerMovement } from '../mechanics/topDown';
 import { createPlayerAnimations } from '../mechanics/playerAnimations';
+import { createPlayer, PlayerCreationResult } from '../mechanics/playerFactory';
 
 export default class GameScene extends Phaser.Scene {
-  private player!: Phaser.Physics.Arcade.Sprite;
-  private wKey!: Phaser.Input.Keyboard.Key;
-  private aKey!: Phaser.Input.Keyboard.Key;
-  private sKey!: Phaser.Input.Keyboard.Key;
-  private dKey!: Phaser.Input.Keyboard.Key;
-  private speed: number = 200;
+    private player!: Phaser.Physics.Arcade.Sprite;
+    private keys!: {
+        w: Phaser.Input.Keyboard.Key;
+        a: Phaser.Input.Keyboard.Key;
+        s: Phaser.Input.Keyboard.Key;
+        d: Phaser.Input.Keyboard.Key;
+    };
+    private speed: number = 200;
 
-  constructor() {
-    super({ key: 'TopDownScene' });
-  }
+    constructor() {
+        super({ key: 'TopDownScene' });
+    }
 
-  create(): void {
-    createPlayerAnimations(this);
-    
-    this.player = this.physics.add.sprite(400, 300, 'player', 0);
-    this.player.setCollideWorldBounds(true);
-    this.wKey = this.input.keyboard!.addKey(Phaser.Input.Keyboard.KeyCodes.W);
-    this.aKey = this.input.keyboard!.addKey(Phaser.Input.Keyboard.KeyCodes.A);
-    this.sKey = this.input.keyboard!.addKey(Phaser.Input.Keyboard.KeyCodes.S);
-    this.dKey = this.input.keyboard!.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-  }
+    create(): void {
+        createPlayerAnimations(this);
+        const playerData: PlayerCreationResult = createPlayer(this, 400, 300, 'player', 0);
+        this.player = playerData.player;
+        this.keys = playerData.keys;
+    }
 
-  update(): void {
-     updatePlayerMovement(this.player, {
-      w: this.wKey,
-      a: this.aKey,
-      s: this.sKey,
-      d: this.dKey
-    }, this.speed);
-  }
+    update(): void {
+        updatePlayerMovement(this.player, this.keys, this.speed);
+    }
 }
