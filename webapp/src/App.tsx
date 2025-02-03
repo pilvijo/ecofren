@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
-import TestPhaser from "./routes/testPhaser";
+import Topdown from "./routes/topdown";
 
 const router = createBrowserRouter([
   {
@@ -7,8 +7,8 @@ const router = createBrowserRouter([
     element: <p>hello world</p>
   },
   {
-    path: "/phaser",
-    element: <TestPhaser />
+    path: "/topdown",
+    element: <Topdown />
   }
 ])
 
