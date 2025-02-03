@@ -1,42 +1,29 @@
 {
-    "name": "template-nextjs",
-    "version": "1.1.1",
-    "description": "A Phaser 3 Next.js project template that demonstrates Next.js with React communication and uses Vite for bundling.",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/phaserjs/template-nextjs.git"
-    },
-    "author": "Phaser Studio <support@phaser.io> (https://phaser.io/)",
-    "license": "MIT",
-    "licenseUrl": "http://www.opensource.org/licenses/mit-license.php",
-    "bugs": {
-        "url": "https://github.com/phaserjs/template-nextjs/issues"
-    },
-    "homepage": "https://github.com/phaserjs/template-nextjs#readme",
-    "keywords": [
-        "phaser",
-        "phaser3",
-        "next",
-        "nextjs",
-        "vite",
-        "typescript"
-    ],
-    "scripts": {
-        "dev": "node log.js dev & next dev -p 8080",
-        "build": "node log.js build & next build",
-        "dev-nolog": "next dev -p 8080",
-        "build-nolog": "next build"
-    },
-    "dependencies": {
-        "next": "14.2.3",
-        "phaser": "^3.87.0",
-        "react": "^18",
-        "react-dom": "^18"
-    },
-    "devDependencies": {
-        "@types/node": "^20",
-        "@types/react": "^18",
-        "@types/react-dom": "^18",
-        "typescript": "^5"
-    }
+  "name": "webapp",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "eslint": "^9.17.0",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react-refresh": "^0.4.16",
+    "globals": "^15.14.0",
+    "typescript": "~5.6.2",
+    "typescript-eslint": "^8.18.2",
+    "vite": "^6.0.5"
+  }
 }
