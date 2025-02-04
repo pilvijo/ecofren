@@ -3,7 +3,7 @@ import Topdown from "./routes/topdown";
 import Login from "./routes/login";
 import LandingPage from "./routes/landing";
 import Register from "./routes/register";
-import ConnectWallet from "./routes/connectWallet";
+import ProblemSelection from "./routes/problem-selection";
 import { WagmiProvider } from "wagmi";
 import wagmiConfig from "./utils/wagmiConfig";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -16,7 +16,7 @@ const router = createBrowserRouter([
     element: <LandingPage />
   },
   {
-    path: "/topdown",
+    path: "/topdown/:problemId",
     element: <Topdown />
   },
   {
@@ -28,8 +28,8 @@ const router = createBrowserRouter([
     element: <Register />
   },
   {
-    path: "/connect/wallet",
-    element: <ConnectWallet />
+    path: "/problem-selection",
+    element: <ProblemSelection />
   }
 ])
 

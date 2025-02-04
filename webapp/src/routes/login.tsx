@@ -70,11 +70,6 @@ export default function Login() {
               <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                 Password
               </label>
-              <div className="text-sm">
-                <a href="#" className="font-medium text-green-600 hover:text-green-500">
-                  Forgot password?
-                </a>
-              </div>
             </div>
             <div className="mt-1">
               <input
@@ -88,6 +83,11 @@ export default function Login() {
                 className="block w-full rounded-md border border-gray-300 px-4 py-2 shadow-sm focus:border-green-500 focus:ring focus:ring-green-400"
               />
             </div>
+              <div className="text-sm mt-2 ">
+                <a href="#" className="font-medium text-green-600 hover:text-green-500">
+                  Forgot password?
+                </a>
+              </div>
           </div>
 
           {error && (
