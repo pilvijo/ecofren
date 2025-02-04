@@ -27,7 +27,6 @@ export default class GameScene extends Phaser.Scene {
 
         const tileset = map.addTilesetImage("tileset", "tileset")!;
         const background = map.createLayer(0, tileset, 0, 0)!;
-        background.setDisplaySize(this.cameras.main.width, this.cameras.main.height);
 
         createPlayerAnimations(this);
         const playerData: PlayerCreationResult = createPlayer(this, 400, 300, 'player', 0);
