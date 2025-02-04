@@ -3,6 +3,12 @@ import Topdown from "./routes/topdown";
 import Login from "./routes/login";
 import LandingPage from "./routes/landing";
 import Register from "./routes/register";
+import ConnectWallet from "./routes/connectWallet";
+import { WagmiProvider } from "wagmi";
+import wagmiConfig from "./utils/wagmiConfig";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
@@ -21,11 +27,19 @@ const router = createBrowserRouter([
     path: "/register",
     element: <Register />
   },
+  {
+    path: "/connect/wallet",
+    element: <ConnectWallet />
+  }
 ])
 
 function App() {
   return (
-    <RouterProvider router={router} />
+    <QueryClientProvider client={queryClient}>
+      <WagmiProvider config={wagmiConfig}>
+        <RouterProvider router={router} />
+      </WagmiProvider>
+    </QueryClientProvider>
   );
 }
 
