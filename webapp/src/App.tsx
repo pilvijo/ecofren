@@ -7,6 +7,7 @@ import ProblemSelection from "./routes/problem-selection";
 import { WagmiProvider } from "wagmi";
 import wagmiConfig from "./utils/wagmiConfig";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import EnergyGame from "./routes/energyGame";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
   {
     path: "/problem-selection",
     element: <ProblemSelection />
+  },
+  {
+    path: "/energy-game",
+    element: <EnergyGame />
   }
 ])
 
