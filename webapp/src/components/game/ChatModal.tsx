@@ -1,4 +1,7 @@
 import { Dispatch, SetStateAction, useState } from 'react'
+import OpenAI from 'openai'
+import { ChatCompletion } from 'openai/resources/index.mjs'
+import { ChatCompletionMessage } from 'openai/src/resources/index.js'
 
 interface Message {
   id: number
@@ -23,17 +26,67 @@ export default function ChatModal({ isOpen, setIsOpen, problemId }: ChatModalPro
     }
   ])
   const [newMessage, setNewMessage] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
-  const handleSendMessage = () => {
+  // Initialize the OpenAI SDK
+  const openai = new OpenAI({
+    apiKey: "",
+    dangerouslyAllowBrowser: true
+  })
+
+  const handleSendMessage = async () => {
     if (!newMessage.trim()) return
 
-    setMessages(prev => [...prev, {
-      id: prev.length + 1,
+    // Create a new user message and update state
+    const userMessage: Message = {
+      id: messages.length + 1,
       text: newMessage,
       sender: 'user',
       timestamp: new Date()
-    }])
+    }
+    const updatedMessages = [...messages, userMessage]
+    setMessages(updatedMessages)
     setNewMessage('')
+    setIsLoading(true)
+
+    try {
+      const response = await openai.chat.completions.create({
+        model: 'gpt-4o-mini',
+        messages: [
+          {
+            role: 'system',
+            content:
+              "You are a helpful agent that listens to the user's choices throughout the day and reviews them. Provide thoughtful insights and sustainable advice based on the conversation."
+          },
+          ...updatedMessages.map(m => ({
+            role: m.sender === 'assistant' ? 'assistant' : 'user',
+            content: m.text
+          }))
+        ] as ChatCompletionMessage[]
+      })
+
+      const assistantReply = response.choices[0].message?.content?.trim()
+      if (assistantReply) {
+        const assistantMessage: Message = {
+          id: updatedMessages.length + 1,
+          text: assistantReply,
+          sender: 'assistant',
+          timestamp: new Date()
+        }
+        setMessages(prev => [...prev, assistantMessage])
+      }
+    } catch (error) {
+      console.error("Error fetching assistant response: ", error)
+      const errorMessage: Message = {
+        id: updatedMessages.length + 1,
+        text: "Sorry, there was an error processing your request.",
+        sender: 'assistant',
+        timestamp: new Date()
+      }
+      setMessages(prev => [...prev, errorMessage])
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -88,6 +141,13 @@ export default function ChatModal({ isOpen, setIsOpen, problemId }: ChatModalPro
               </div>
             </div>
           ))}
+          {isLoading && (
+            <div className="flex justify-start">
+              <div className="max-w-[80%] rounded-lg p-3 bg-[#1a1b2e] text-gray-200">
+                Thinking...
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Input */}
@@ -97,13 +157,15 @@ export default function ChatModal({ isOpen, setIsOpen, problemId }: ChatModalPro
               type="text"
               value={newMessage}
               onChange={(e) => setNewMessage(e.target.value)}
-              onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+              onKeyPress={(e) => e.key === 'Enter' && !isLoading && handleSendMessage()}
               placeholder="Type your message..."
-              className="flex-1 bg-[#1a1b2e] text-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#627eea]/50"
+              disabled={isLoading}
+              className="flex-1 bg-[#1a1b2e] text-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#627eea]/50 disabled:opacity-50"
             />
             <button
               onClick={handleSendMessage}
-              className="bg-[#627eea] text-white p-2 rounded-lg hover:bg-[#4c63bb] transition-colors"
+              disabled={isLoading}
+              className="bg-[#627eea] text-white p-2 rounded-lg hover:bg-[#4c63bb] transition-colors disabled:opacity-50"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 rotate-90" viewBox="0 0 20 20" fill="currentColor">
                 <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
