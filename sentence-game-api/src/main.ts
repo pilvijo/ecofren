@@ -6,6 +6,8 @@ import path from 'path';
 import cors from 'cors';
 import generateSentencesRouter from './generate-sentences';
 import generateChoicesRouter from './generate-choices';
+import generateActivityQuestion from './generate-activity-question';
+import generateOwnershipQuestion from './generate-ownership-question';
 
 const app = express();
 
@@ -16,6 +18,8 @@ app.use(cors({
 app.use(express.json());
 app.use('/api', generateSentencesRouter);
 app.use('/api', generateChoicesRouter);
+app.use('/api', generateActivityQuestion);
+app.use('/api', generateOwnershipQuestion);
 
 // Serve static files (e.g., your built React app)
 app.use(express.static(path.join(__dirname, 'build')));

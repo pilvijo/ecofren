@@ -9,6 +9,8 @@ import wagmiConfig from "./utils/wagmiConfig";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import StatementsGame from "./routes/StatementsGame";
 import QuestionsGame from "./routes/questionsGame";
+import ActivityQuiz from "./routes/activityQuiz";
+import OwnershipQuiz from "./routes/ownershipQuiz";
 
 const queryClient = new QueryClient();
 
@@ -40,6 +42,14 @@ const router = createBrowserRouter([
   {
     path: "/questions-game",
     element: <QuestionsGame />
+  },
+  {
+    path: "/activity-game",
+    element: <ActivityQuiz />
+  },
+  {
+    path: "/ownership-game",
+    element: <OwnershipQuiz />
   }
 ])
 
