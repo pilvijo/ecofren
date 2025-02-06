@@ -5,6 +5,7 @@ import express from 'express';
 import path from 'path';
 import cors from 'cors';
 import generateSentencesRouter from './generate-sentences';
+import generateChoicesRouter from './generate-choices';
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(cors({
 
 app.use(express.json());
 app.use('/api', generateSentencesRouter);
+app.use('/api', generateChoicesRouter);
 
 // Serve static files (e.g., your built React app)
 app.use(express.static(path.join(__dirname, 'build')));

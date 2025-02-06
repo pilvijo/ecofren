@@ -26,7 +26,6 @@ Generate 20 short sentences about energy. Exactly 10 sentences should describe g
       throw new Error('No response content received from OpenAI');
     }
     // Parse the answer as JSON
-    console.log(answer);
     const sentences = JSON.parse(answer)["energySentences"];
     res.json(sentences);
   } catch (err: any) {
