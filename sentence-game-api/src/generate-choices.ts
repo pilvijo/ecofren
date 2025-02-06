@@ -11,7 +11,7 @@ const openai = new OpenAI({
 router.get('/generate-question', async (req: Request, res: Response) => {
   try {
     const prompt = `
-Generate one multiple-choice question about energy. The question should have exactly 4 choices and only one choice should be marked as correct. For the answer choices, output each as a JSON object with two keys: "text" (the choice text) and "isCorrect" (true if this is the correct answer, false otherwise). Then, output the question text. Return the results as a JSON object wrapped within a key named "energyQuestion". For example:
+Generate one multiple-choice question about energy, and other sustainable concepts related to it, and make it unique each time. The question should have exactly 4 choices and only one choice should be marked as correct. For the answer choices, output each as a JSON object with two keys: "text" (the choice text) and "isCorrect" (true if this is the correct answer, false otherwise). Then, output the question text. Return the results as a JSON object wrapped within a key named "energyQuestion". For example:
 
 {
   "energyQuestion": {

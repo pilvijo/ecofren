@@ -7,7 +7,7 @@ interface Sentence {
   isGood: boolean;
 }
 
-const EnergyGame: React.FC = () => {
+const StatementsGame: React.FC = () => {
   const [sentences, setSentences] = useState<Sentence[]>([]);
   const [selected, setSelected] = useState<number[]>([]);
   const [score, setScore] = useState<number>(0);
@@ -104,4 +104,4 @@ const EnergyGame: React.FC = () => {
   );
 };
 
-export default EnergyGame;
+export default StatementsGame;

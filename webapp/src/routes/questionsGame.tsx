@@ -1,3 +1,4 @@
+// EnergyQuiz.tsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -11,28 +12,38 @@ interface EnergyQuestion {
   choices: Choice[];
 }
 
-const EnergyQuiz: React.FC = () => {
+const QuestionGame: React.FC = () => {
   const [questionData, setQuestionData] = useState<EnergyQuestion | null>(null);
   const [selectedChoice, setSelectedChoice] = useState<number | null>(null);
   const [feedback, setFeedback] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [showDialog, setShowDialog] = useState<boolean>(false);
 
+  // Function to fetch a new question
+  const fetchQuestion = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get<EnergyQuestion>('http://localhost:5000/api/generate-question');
+      setQuestionData(response.data);
+      setSelectedChoice(null);
+      setFeedback(null);
+      setShowDialog(false);
+    } catch (err) {
+      console.error('Error fetching question:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Fetch initial question on mount
   useEffect(() => {
-    const fetchQuestion = async () => {
-      try {
-        const response = await axios.get<EnergyQuestion>('http://localhost:5000/api/generate-question');
-        setQuestionData(response.data);
-        setLoading(false);
-      } catch (err) {
-        console.error('Error fetching question:', err);
-        setLoading(false);
-      }
-    };
     fetchQuestion();
   }, []);
 
+  // Handle answer selection
   const handleChoiceClick = (index: number) => {
-    if (selectedChoice !== null) return; // prevent multiple selections
+    // Prevent multiple selections
+    if (selectedChoice !== null) return;
     setSelectedChoice(index);
     if (questionData) {
       const chosen = questionData.choices[index];
@@ -41,7 +52,14 @@ const EnergyQuiz: React.FC = () => {
       } else {
         setFeedback('Incorrect. Better luck next time!');
       }
+      // Open the dialog after submission
+      setShowDialog(true);
     }
+  };
+
+  // Handler for moving on to the next question
+  const handleNextQuestion = () => {
+    fetchQuestion();
   };
 
   if (loading) {
@@ -79,13 +97,48 @@ const EnergyQuiz: React.FC = () => {
           </li>
         ))}
       </ul>
-      {feedback && (
-        <div style={{ marginTop: '20px', fontSize: '1.2em' }}>
-          {feedback}
+
+      {/* Dialog after answer submission */}
+      {showDialog && (
+        <div
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <div
+            style={{
+              backgroundColor: '#fff',
+              padding: '30px',
+              borderRadius: '8px',
+              textAlign: 'center',
+              minWidth: '300px',
+            }}
+          >
+            <h2>Result</h2>
+            <p>{feedback}</p>
+            <button
+              onClick={handleNextQuestion}
+              style={{
+                padding: '10px 20px',
+                marginTop: '20px',
+                cursor: 'pointer',
+              }}
+            >
+              Next Question
+            </button>
+          </div>
         </div>
       )}
     </div>
   );
 };
 
-export default EnergyQuiz;
+export default QuestionGame;
