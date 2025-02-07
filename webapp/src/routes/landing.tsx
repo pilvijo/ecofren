@@ -5,6 +5,13 @@ import useAuth from "../hooks/useAuth";
 
 const carouselImages = [
     {
+        src: "/assets/IMG_3671.jpeg",
+        alt: "Game Preview",
+        title: "Explore the World",
+        description:
+            "Immerse yourself in a vibrant eco-conscious gaming experience",
+    },
+    {
         src: "/assets/illustration.webp",
         alt: "Game Preview",
         title: "Explore the World",

@@ -43,11 +43,11 @@ export default function Carousel({ images, currentSlide, setCurrentSlide }: Caro
             }}
           >
             {images.map((image, index) => (
-              <div key={index} className="w-full h-full flex-shrink-0 relative">
+              <div key={index} className="max-w-lg w-full h-full min-h-[512px] flex-shrink-0 relative">
                 <img
                   src={image.src}
                   alt={image.alt}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full min-h-[512px] object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent">
                   <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
