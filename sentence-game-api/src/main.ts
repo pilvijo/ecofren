@@ -12,7 +12,7 @@ import generateOwnershipQuestion from './generate-ownership-question';
 const app = express();
 
 app.use(cors({
-  origin: 'http://localhost:5173'
+  origin: ['http://localhost:5173', 'http://ecofren.tiscacatalin.com', 'https://ecofren.tiscacatalin.com'],
 }));
 
 app.use(express.json());
