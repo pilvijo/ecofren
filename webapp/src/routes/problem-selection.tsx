@@ -12,27 +12,27 @@ const problems: Problem[] = [
     {
         id: "energy-crisis",
         title: "Energy Crisis",
-        image: "/assets/interior/TopDownHouse_FurnitureState1.png",
+        image: "/assets/energy-crisis.webp",
     },
     {
         id: "green-transport",
         title: "Green Transport",
-        image: "/assets/interior/TopDownHouse_FurnitureState2.png",
+        image: "/assets/green-transport.webp",
     },
     {
         id: "waste-management",
         title: "Waste Management",
-        image: "/assets/interior/TopDownHouse_FloorsAndWalls.png",
+        image: "/assets/waste-management.webp",
     },
     {
         id: "decentralized-economy",
         title: "Decentralized Economy",
-        image: "/assets/interior/TopDownHouse_DoorsAndWindows.png",
+        image: "/assets/decentralized-economy.webp",
     },
     {
         id: "sustainable-living",
         title: "Sustainable Living",
-        image: "/assets/interior/TopDownHouse_SmallItems.png",
+        image: "/assets/sustainable-living.webp",
     },
 ];
 
