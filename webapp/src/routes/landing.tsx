@@ -12,13 +12,13 @@ const carouselImages = [
             "Immerse yourself in a vibrant eco-conscious gaming experience",
     },
     {
-        src: "/assets/interior/TopDownHouse_FurnitureState1.png",
+        src: "/assets/illustration1.webp",
         alt: "Interior Preview",
         title: "Customize Your Space",
         description: "Design and build your sustainable virtual home",
     },
     {
-        src: "/assets/interior/TopDownHouse_FurnitureState2.png",
+        src: "/assets/illustration2.webp",
         alt: "Furniture Preview",
         title: "Collect & Create",
         description: "Earn eco-friendly furniture and decorations",

@@ -11,55 +11,52 @@ interface CarouselImage {
 interface CarouselProps {
   images: CarouselImage[]
   currentSlide: number
-  setCurrentSlide: (index: number) => void
+  setCurrentSlide: React.Dispatch<React.SetStateAction<number>>
 }
 
 export default function Carousel({ images, currentSlide, setCurrentSlide }: CarouselProps) {
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentSlide((currentSlide + 1) % images.length)
-    }, 5000) // Change slide every 5 seconds
+      setCurrentSlide(prev => (prev + 1) % images.length)
+    }, 5000) 
 
     return () => clearInterval(timer)
-  }, [currentSlide, images.length, setCurrentSlide])
+  }, [images.length, setCurrentSlide])
 
   const nextSlide = () => {
-    setCurrentSlide((currentSlide + 1) % images.length)
+    setCurrentSlide(prev => (prev + 1) % images.length)
   }
 
   const prevSlide = () => {
-    setCurrentSlide((currentSlide - 1 + images.length) % images.length)
+    setCurrentSlide(prev => (prev - 1 + images.length) % images.length)
   }
 
   return (
     <div className="lg:mt-0">
       <div className="relative w-full max-w-lg mx-auto">
         <div className="relative overflow-hidden rounded-2xl shadow-2xl aspect-[4/3]">
-          <div 
-            className="relative w-full h-full transition-transform duration-500 ease-out"
-            style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+          <div
+            className="flex transition-transform duration-500 ease-out"
+            style={{ 
+              width: `${images.length * 100}%`,
+              transform: `translateX(-${currentSlide * (100 / images.length)}%)`
+            }}
           >
-            <div className="absolute inset-0 flex">
-              {images.map((image, index) => (
-                <div
-                  key={index}
-                  className="relative w-full h-full flex-shrink-0"
-                  style={{ left: `${index * 100}%` }}
-                >
-                  <img
-                    src={image.src}
-                    alt={image.alt}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent">
-                    <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                      <h3 className="text-xl font-semibold mb-2">{image.title}</h3>
-                      <p className="text-sm text-gray-200">{image.description}</p>
-                    </div>
+            {images.map((image, index) => (
+              <div key={index} className="w-full h-full flex-shrink-0 relative">
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent">
+                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                    <h3 className="text-xl font-semibold mb-2">{image.title}</h3>
+                    <p className="text-sm text-gray-200">{image.description}</p>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
 
           <button
