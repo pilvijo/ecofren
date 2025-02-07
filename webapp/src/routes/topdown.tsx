@@ -8,12 +8,14 @@ import { useAccount } from 'wagmi'
 
 export default function GameCanvas() {
   const gameRef = useRef<Phaser.Game | null>(null)
-  const [isChatOpen, setIsChatOpen] = useState(true)
+  const [isChatOpen, setIsChatOpen] = useState(false)
   const { problemId } = useParams()
   const navigate = useNavigate()
   const { isConnected } = useAccount()
 
   useEffect(() => {
+    if (isChatOpen)
+      return;
     if (!isConnected) {
       navigate('/problem-selection')
       return
@@ -23,9 +25,8 @@ export default function GameCanvas() {
     return () => {
       gameRef.current?.destroy(true)
     }
-  }, [isConnected, navigate])
+  }, [isConnected, navigate, isChatOpen])
 
-  // Disable game controls when chat is open
   useEffect(() => {
     if (gameRef.current) {
       const scene = gameRef.current.scene.getScene('TopDownScene') as any
@@ -93,10 +94,12 @@ export default function GameCanvas() {
         </div>
       </div>
 
-      <div 
-        id="game-container" 
-        className="rounded-md border-8 border-green-700 outline outline-2 outline-green-800 shadow-lg"
-      />
+      {!isChatOpen && (
+        <div 
+          id="game-container" 
+          className="rounded-md border-8 border-green-700 outline outline-2 outline-green-800 shadow-lg"
+        />
+      )}
 
       <ChatModal 
         isOpen={isChatOpen}

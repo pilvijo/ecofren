@@ -19,7 +19,7 @@ const StatementsGame: React.FC = () => {
   useEffect(() => {
     const fetchSentences = async () => {
       try {
-        const response = await axios.get<Sentence[]>('http://localhost:5000/api/generate-sentences');
+        const response = await axios.get<Sentence[]>('http://ecofren-api.tiscacatalin.com/api/generate-sentences');
         setSentences(response.data);
         setLoading(false);
       } catch (err) {

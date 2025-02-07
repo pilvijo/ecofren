@@ -23,7 +23,7 @@ const QuestionGame: React.FC = () => {
   const fetchQuestion = async () => {
     setLoading(true);
     try {
-      const response = await axios.get<EnergyQuestion>('http://localhost:5000/api/generate-question');
+      const response = await axios.get<EnergyQuestion>('http://ecofren-api.tiscacatalin.com/api/generate-question');
       setQuestionData(response.data);
       setSelectedChoice(null);
       setFeedback(null);

@@ -22,7 +22,7 @@ const ActivityQuiz: React.FC = () => {
   const fetchChallenge = async () => {
     setLoading(true);
     try {
-      const response = await axios.get<ActivityChallenge>('http://localhost:5000/api/generate-activity-question');
+      const response = await axios.get<ActivityChallenge>('http://ecofren-api.tiscacatalin.com/api/generate-activity-question');
       setChallenge(response.data);
       setSelectedChoice(null);
       setFeedback(null);
