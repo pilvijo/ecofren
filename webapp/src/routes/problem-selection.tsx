@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { injected, useAccount, useConnect } from "wagmi";
+import { injected, useConnect } from "wagmi";
 import useAuth from "../hooks/useAuth";
 import supabase from "../utils/supabase";
 
@@ -42,7 +42,6 @@ export default function ProblemSelection() {
     const [selectedProblem, setSelectedProblem] = useState<string | null>(null);
     const [attachedWallet, setAttachedWallet] = useState<string | null>(null);
     const navigate = useNavigate();
-    const { isConnected, address } = useAccount();
     const { connect } = useConnect();
     const { user } = useAuth();
 
