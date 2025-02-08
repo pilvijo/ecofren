@@ -44,9 +44,6 @@ export default function Navigation({ mobileMenuOpen, setMobileMenuOpen, user }: 
                   alt="Ecofren"
                 />
               </div>
-              <span className="ml-3 text-xl font-bold bg-gradient-to-r from-[#627eea] to-[#454a75] bg-clip-text text-transparent">
-                Ecofren
-              </span>
             </a>
           </div>
           <div className="flex lg:hidden">
