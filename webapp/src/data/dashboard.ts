@@ -92,6 +92,7 @@ export interface Activity {
   description: string;
   points: number;
   iconType: 'chat' | 'question' | 'activity' | 'truth';
+  href: string;
 }
 
 export const activities: Activity[] = [
@@ -101,6 +102,7 @@ export const activities: Activity[] = [
     description: 'Dirty energy throws knives with statements. Pick the right ones and be fast!',
     points: 60,
     iconType: 'chat',
+    href: "/energy-game"
   },
   {
     id: '2',
@@ -108,6 +110,7 @@ export const activities: Activity[] = [
     description: 'Lifecycle of materials: Right choices improve the environment, wrong choices turn it ugly.',
     points: 35,
     iconType: 'question',
+    href: "/questions-game"
   },
   {
     id: '3',
@@ -115,6 +118,7 @@ export const activities: Activity[] = [
     description: '"Bad Habits" is chasing you around while challenges create an engaging story.',
     points: 85,
     iconType: 'activity',
+    href: "/activity-game"
   },
   {
     id: '4',
@@ -122,7 +126,16 @@ export const activities: Activity[] = [
     description: 'Connect with nature through honest ownership and sharing. Work together to transform your neighborhood.',
     points: 55,
     iconType: 'truth',
+    href: "/ownership-game"
   },
+  {
+    id: '5',
+    title: 'Ownership',
+    description: "Ownership is a game of strategy. Make the right moves and earn points.",
+    points: 45,
+    iconType: 'activity',
+    href: "/ownership-game" 
+  }
 ];
 
 export const chartData = {

@@ -24,9 +24,10 @@ export default function Battlefield() {
       <h2 className="text-lg font-semibold mb-4">Battlefield</h2>
       <div className="space-y-4">
         {activities.map((activity) => (
-          <div 
+          <a 
             key={activity.id} 
             className="flex flex-col sm:flex-row items-start sm:items-center justify-between rounded-xl bg-[#1a1b2e] p-4 hover:bg-[#2a2b3e] transition-colors cursor-pointer"
+            href={activity.href}
           >
             <div className="flex items-start space-x-4 mb-4 sm:mb-0">
               <div className="rounded-full bg-[#627eea]/20 p-2 shrink-0">
@@ -41,7 +42,7 @@ export default function Battlefield() {
               <span className="text-[#627eea]">+/-</span>
               <span>{activity.points}</span>
             </div>
-          </div>
+          </a>
         ))}
       </div>
     </section>

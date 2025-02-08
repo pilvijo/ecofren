@@ -46,11 +46,6 @@ export default function ProblemSelection() {
     const { user } = useAuth();
 
     useEffect(() => {
-        if (!user) {
-            navigate("/");
-            return;
-        }
-
         const fetchWalletAddress = async () => {
             const { data, error } = await supabase
                 .from("user_wallets")
