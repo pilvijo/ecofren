@@ -116,16 +116,27 @@ export default function LandingPage() {
                                 </p>
                                 <div className="mt-10 flex items-center gap-x-6">
                                     {user ? (
-                                        <a
-                                            href="/problem-selection"
-                                            onClick={handlePlayClick}
-                                            className="group relative inline-flex items-center justify-center rounded-full bg-gradient-to-r from-[#627eea] to-[#454a75] p-[2px] text-white focus:outline-none focus:ring-2 focus:ring-[#627eea] focus:ring-offset-2 hover:text-white">
-                                            <span className="relative rounded-full bg-[#0c0c1d] px-8 py-3 transition-all duration-200 ease-out group-hover:bg-transparent">
-                                                <span className="relative text-base font-semibold text-[#627eea] transition-colors duration-200 ease-out group-hover:text-white">
-                                                    Play Now
+                                        <div className="flex items-center gap-4">
+                                            <a
+                                                href="/problem-selection"
+                                                onClick={handlePlayClick}
+                                                className="group relative inline-flex items-center justify-center rounded-full bg-gradient-to-r from-[#627eea] to-[#454a75] p-[2px] text-white focus:outline-none focus:ring-2 focus:ring-[#627eea] focus:ring-offset-2 hover:text-white">
+                                                <span className="relative rounded-full bg-[#0c0c1d] px-8 py-3 transition-all duration-200 ease-out group-hover:bg-transparent">
+                                                    <span className="relative text-base font-semibold text-[#627eea] transition-colors duration-200 ease-out group-hover:text-white">
+                                                        Play Now
+                                                    </span>
                                                 </span>
-                                            </span>
-                                        </a>
+                                            </a>
+                                            <a
+                                                href="/dashboard"
+                                                className="group relative inline-flex items-center justify-center rounded-full bg-gradient-to-r from-[#454a75] to-[#627eea] p-[2px] text-white focus:outline-none focus:ring-2 focus:ring-[#627eea] focus:ring-offset-2 hover:text-white">
+                                                <span className="relative rounded-full bg-[#0c0c1d] px-8 py-3 transition-all duration-200 ease-out group-hover:bg-transparent">
+                                                    <span className="relative text-base font-semibold text-[#627eea] transition-colors duration-200 ease-out group-hover:text-white">
+                                                        Dashboard
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </div>
                                     ) : (
                                         <a
                                             href="/register"
@@ -137,11 +148,6 @@ export default function LandingPage() {
                                             </span>
                                         </a>
                                     )}
-                                    <a
-                                        href="#features"
-                                        className="text-sm font-semibold leading-6 text-gray-300 hover:text-[#627eea] transition-colors">
-                                        Learn more <span aria-hidden="true">→</span>
-                                    </a>
                                 </div>
                             </div>
 

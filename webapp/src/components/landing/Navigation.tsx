@@ -1,5 +1,5 @@
 import { Dialog, DialogPanel } from '@headlessui/react'
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Bars3Icon, XMarkIcon, ChartBarIcon } from '@heroicons/react/24/outline'
 import { User } from '@supabase/supabase-js'
 import { useState } from 'react'
 import { useAccount } from 'wagmi'
@@ -35,13 +35,18 @@ export default function Navigation({ mobileMenuOpen, setMobileMenuOpen, user }: 
       <header className="absolute inset-x-0 top-0 z-50">
         <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
           <div className="flex lg:flex-1">
-            <a href="#" className="-m-1.5 p-1.5">
-              <span className="sr-only">Ecofren</span>
-              <img
-                className="h-12 w-auto"
-                src="/assets/logo.png"
-                alt="Ecofren"
-              />
+            <a href="/" className="-m-1.5 p-1.5 flex items-center group">
+              <div className="relative">
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#627eea]/20 to-[#454a75]/20 blur-md transition-all duration-300 group-hover:from-[#627eea]/30 group-hover:to-[#454a75]/30" />
+                <img
+                  className="h-12 w-auto relative transition-transform duration-300 group-hover:scale-105"
+                  src="/assets/logo.png"
+                  alt="Ecofren"
+                />
+              </div>
+              <span className="ml-3 text-xl font-bold bg-gradient-to-r from-[#627eea] to-[#454a75] bg-clip-text text-transparent">
+                Ecofren
+              </span>
             </a>
           </div>
           <div className="flex lg:hidden">
@@ -70,6 +75,13 @@ export default function Navigation({ mobileMenuOpen, setMobileMenuOpen, user }: 
               <>
                 <SettingsMenu />
                 <a
+                  href="/dashboard"
+                  className="inline-flex items-center rounded-lg bg-[#1a1b2e] px-5 py-3 text-sm font-semibold text-gray-300 shadow-lg hover:bg-[#2a2b3e] hover:text-[#627eea] transition-all"
+                >
+                  <ChartBarIcon className="h-5 w-5 mr-2" />
+                  Dashboard
+                </a>
+                <a
                   href="/problem-selection"
                   onClick={handlePlayClick}
                   className="inline-flex items-center rounded-lg bg-[#627eea] px-5 py-2.5 text-sm font-semibold text-white shadow-lg hover:bg-[#4c63bb] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#627eea] transition-all hover:scale-105"
@@ -95,13 +107,15 @@ export default function Navigation({ mobileMenuOpen, setMobileMenuOpen, user }: 
           <div className="fixed inset-0 z-50" />
           <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-[#0c0c1d] px-6 py-6 sm:max-w-sm">
             <div className="flex items-center justify-between">
-              <a href="#" className="-m-1.5 p-1.5">
-                <span className="sr-only">Ecofren</span>
+              <a href="/" className="-m-1.5 p-1.5 flex items-center">
                 <img
                   className="h-8 w-auto"
                   src="/assets/logo.png"
                   alt="Ecofren"
                 />
+                <span className="ml-2 text-lg font-bold bg-gradient-to-r from-[#627eea] to-[#454a75] bg-clip-text text-transparent">
+                  Ecofren
+                </span>
               </a>
               <button
                 type="button"
@@ -125,9 +139,16 @@ export default function Navigation({ mobileMenuOpen, setMobileMenuOpen, user }: 
                     </a>
                   ))}
                 </div>
-                <div className="py-6">
+                <div className="py-6 space-y-3">
                   {user ? (
                     <>
+                      <a
+                        href="/dashboard"
+                        className="-mx-3 flex items-center rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-300 hover:bg-gray-800"
+                      >
+                        <ChartBarIcon className="h-5 w-5 mr-2" />
+                        Dashboard
+                      </a>
                       <a
                         href="/problem-selection"
                         onClick={handlePlayClick}

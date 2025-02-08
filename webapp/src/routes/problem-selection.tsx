@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { injected, useAccount, useConnect } from "wagmi";
+import useAuth from "../hooks/useAuth";
+import supabase from "../utils/supabase";
 
 interface Problem {
     id: string;
@@ -38,15 +40,32 @@ const problems: Problem[] = [
 
 export default function ProblemSelection() {
     const [selectedProblem, setSelectedProblem] = useState<string | null>(null);
+    const [attachedWallet, setAttachedWallet] = useState<string | null>(null);
     const navigate = useNavigate();
-    const { isConnected } = useAccount();
+    const { isConnected, address } = useAccount();
     const { connect } = useConnect();
+    const { user } = useAuth();
 
     useEffect(() => {
-        if (!isConnected) {
+        if (!user) {
             navigate("/");
+            return;
         }
-    }, [isConnected, navigate]);
+
+        const fetchWalletAddress = async () => {
+            const { data, error } = await supabase
+                .from("user_wallets")
+                .select("wallet_address")
+                .eq("user_id", user.id)
+                .maybeSingle();
+
+            if (!error && data) {
+                setAttachedWallet(data.wallet_address);
+            }
+        };
+
+        fetchWalletAddress();
+    }, [user, navigate]);
 
     const handleContinue = () => {
         if (selectedProblem) {
@@ -54,7 +73,8 @@ export default function ProblemSelection() {
         }
     };
 
-    if (!isConnected) {
+    // Only show wallet connection if user has no attached wallet
+    if (!attachedWallet) {
         return (
             <div className="h-screen bg-[#0c0c1d] flex items-center justify-center">
                 <div className="max-w-md w-full mx-4 p-8 bg-[#1a1b2e] rounded-xl border border-[#627eea]/20 shadow-xl">

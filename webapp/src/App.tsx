@@ -4,6 +4,7 @@ import Login from "./routes/login";
 import LandingPage from "./routes/landing";
 import Register from "./routes/register";
 import ProblemSelection from "./routes/problem-selection";
+import Dashboard from "./routes/dashboard";
 import { WagmiProvider } from "wagmi";
 import wagmiConfig from "./utils/wagmiConfig";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <LandingPage />
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard />
   },
   {
     path: "/topdown/:problemId",
